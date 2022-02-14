@@ -39,17 +39,6 @@ export default function Todo({ id, content, isCompleted }) {
 
   const [mutationUpdateTodo] = useMutation(UpdateTodoMutation, {
     variables: { id, content: todoText },
-    update: (cache, { data }) => {
-      cache.modify({
-        fields: {
-          getTodoList(existingTodoList, { readField }) {
-            return existingTodoList.map((todo) =>
-              todo.id !== id ? todo : data.updateTodo
-            );
-          },
-        },
-      });
-    },
   });
 
   const updateTodo = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-
+import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { AddTodoMutation } from "../graphql";
 import Button from "@mui/material/Button";
@@ -14,7 +14,15 @@ export default function AddTodo() {
       cache.modify({
         fields: {
           getTodoList(existingTodoList) {
-            return [...existingTodoList, data?.createTodo];
+            const newTodoRef = cache.writeFragment({
+              data: data.createTodo,
+              fragment: gql`
+                fragment NewTodo on Todo {
+                  id
+                }
+              `,
+            });
+            return [...existingTodoList, newTodoRef];
           },
         },
       });
