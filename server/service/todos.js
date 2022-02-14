@@ -3,19 +3,22 @@ import { nanoid } from "nanoid";
 
 export function getTodoList() {
   return new Promise((resolve) =>
-    db.find({}, function (err, docs) {
-      if (err) {
-        reject(err);
-      }
-      resolve(docs);
-    })
+    db
+      .find({})
+      .sort({ timestamp: 1 })
+      .exec(function (err, docs) {
+        if (err) {
+          reject(err);
+        }
+        resolve(docs);
+      })
   );
 }
 
 export function createTodo(content) {
   return new Promise((resolve) =>
     db.insert(
-      { id: nanoid(), content, isCompleted: false },
+      { id: nanoid(), content, isCompleted: false, timestamp: Date.now() },
       function (err, newDoc) {
         if (err) {
           reject(err);
