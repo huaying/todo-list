@@ -1,12 +1,6 @@
 import { gql } from "@apollo/client";
 
 export const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    status: String!
-  }
-
   type Todo {
     id: ID!
     content: String!
@@ -14,7 +8,6 @@ export const typeDefs = gql`
   }
 
   type Query {
-    viewer: User
     getTodoList: [Todo!]
   }
 

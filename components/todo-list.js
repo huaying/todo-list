@@ -1,4 +1,6 @@
 import React from "react";
+import List from "@mui/material/List";
+import { grey } from "@mui/material/colors";
 import { useQuery } from "@apollo/client";
 import { TodoListQuery } from "../graphql";
 import Todo from "./todo";
@@ -11,7 +13,7 @@ export default function TodoList() {
   }
 
   return (
-    <div>
+    <List sx={{ bgcolor: grey[100], mb: 2, maxHeight: 500, overflow: "auto" }}>
       {data.getTodoList.map((todo) => (
         <Todo
           key={todo.id}
@@ -20,6 +22,6 @@ export default function TodoList() {
           isCompleted={todo.isCompleted}
         />
       ))}
-    </div>
+    </List>
   );
 }

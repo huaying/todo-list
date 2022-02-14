@@ -1,6 +1,11 @@
 import React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+
 import { useMutation } from "@apollo/client";
 import { AddTodoMutation } from "../graphql";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export default function AddTodo() {
   const [todoText, setTodoText] = React.useState("");
@@ -26,13 +31,23 @@ export default function AddTodo() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={todoText}
-        onChange={(e) => setTodoText(e.target.value)}
-      />
-      <button onClick={addTodo}>Add Todo</button>
-    </div>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item sm>
+        <TextField
+          size="small"
+          fullWidth
+          label="Add Todo"
+          variant="outlined"
+          value={todoText}
+          onChange={(e) => setTodoText(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && addTodo()}
+        />
+      </Grid>
+      <Grid item>
+        <Button variant="contained" onClick={addTodo}>
+          Add Todo
+        </Button>
+      </Grid>
+    </Grid>
   );
 }

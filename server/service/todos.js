@@ -65,7 +65,6 @@ export function toggleTodo(id) {
           }
         );
       }
-      resolve(null);
     })
   );
 }

@@ -1,12 +1,19 @@
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from '../apollo/client'
+import { ApolloProvider } from "@apollo/client";
+import { useApollo } from "../apollo/client";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const theme = createTheme();
 
 export default function App({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps.initialApolloState)
+  const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
-    </ApolloProvider>
-  )
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={apolloClient}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </ThemeProvider>
+  );
 }

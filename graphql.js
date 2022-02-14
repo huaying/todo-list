@@ -26,6 +26,16 @@ export const DeleteTodoMutation = gql`
   }
 `;
 
+export const ToggleTodoMutation = gql`
+  mutation ToggleTodoMutation($id: ID!) {
+    toggleTodo(id: $id) {
+      id
+      content
+      isCompleted
+    }
+  }
+`;
+
 export const UpdateTodoMutation = gql`
   mutation UpdateTodoMutation($id: ID!, $content: String!) {
     updateTodo(id: $id, content: $content) {
