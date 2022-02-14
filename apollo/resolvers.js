@@ -17,7 +17,10 @@ export const resolvers = {
       return createTodo(content);
     },
     updateTodo(_, { id, content }) {
-      return updateTodo(id, content);
+      if (content) {
+        return updateTodo(id, content);
+      }
+      throw Error("content is required");
     },
     toggleTodo(_, { id }) {
       return toggleTodo(id);

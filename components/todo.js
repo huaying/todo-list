@@ -52,6 +52,13 @@ export default function Todo({ id, content, isCompleted }) {
     },
   });
 
+  const updateTodo = () => {
+    if (todoText) {
+      setIsEditing(false);
+      mutationUpdateTodo();
+    }
+  };
+
   return (
     <ListItem sx={{ height: 60 }}>
       {isEditing ? (
@@ -60,24 +67,17 @@ export default function Todo({ id, content, isCompleted }) {
             <TextField
               size="small"
               type="text"
+              sx={{ bgcolor: "white" }}
               value={todoText}
               onChange={(e) => setTodoText(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  setIsEditing(false);
-                  mutationUpdateTodo();
-                }
-              }}
+              onKeyPress={(e) => e.key === "Enter" && updateTodo()}
             />
           </Grid>
           <Grid item>
             <CheckIcon
               sx={{ cursor: "pointer" }}
               color="success"
-              onClick={() => {
-                setIsEditing(false);
-                mutationUpdateTodo();
-              }}
+              onClick={updateTodo}
             />
           </Grid>
           <Grid item>
@@ -99,7 +99,7 @@ export default function Todo({ id, content, isCompleted }) {
             xs
             sx={{
               cursor: "pointer",
-              "text-decoration": isCompleted ? "line-through" : undefined,
+              textDecoration: isCompleted ? "line-through" : undefined,
             }}
             onClick={mutationToggleTodo}
           >

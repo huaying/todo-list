@@ -8,11 +8,11 @@ const Index = () => {
     <Container maxWidth="sm">
       <Grid
         container
-        spacing={0}
         direction="column"
         justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
+        <h1>TodoList</h1>
         <TodoList />
         <AddTodo />
       </Grid>

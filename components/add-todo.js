@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 import { useMutation } from "@apollo/client";
 import { AddTodoMutation } from "../graphql";
@@ -44,7 +43,7 @@ export default function AddTodo() {
         />
       </Grid>
       <Grid item>
-        <Button variant="contained" onClick={addTodo}>
+        <Button variant="contained" onClick={addTodo} disabled={!todoText}>
           Add Todo
         </Button>
       </Grid>
